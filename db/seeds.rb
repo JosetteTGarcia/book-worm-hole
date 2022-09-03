@@ -16,7 +16,7 @@ Book.create!(
   author: "Colleen Hoover",
   img_url: "https://images-na.ssl-images-amazon.com/images/I/51i7u1BKY5L._SX330_BO1,204,203,200_.jpg",
   average_rating: 4.5,
-  genre_id: 170
+  genre_id: 2
 )
 
 
@@ -25,19 +25,19 @@ Book.create!(
     author: "Delia Ownens",
     img_url: "https://www.amazon.com/Where-Crawdads-Sing-Delia-Owens/dp/0735219095",
     average_rating: 5,
-    genre_id: 171
+    genre_id: 3
   )
   Book.create(
     title: "Atomic Habits",
     author: "James Clear",
     img_url: "https://www.amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299",
     average_rating: 4.7,
-    genre_id: 175
+    genre_id: 7
   )
 
   UserBook.create!(
-    user_id: 3,
-    book_id: 9,
+    user_id: 1,
+    book_id: 2,
     user_notes: "This book was okay. Not as good as everyone says. I liked the ending though.",
     date_started: '2022-06-26',
     date_completed: '2022-06-30',
@@ -46,8 +46,8 @@ Book.create!(
   )
 
   UserBook.create!(
-    user_id: 3,
-    book_id: 10,
+    user_id: 1,
+    book_id: 1,
     user_notes: "Slow start. Having trouble finishing.",
     date_started: '2022-07-03',
     date_completed: nil,
