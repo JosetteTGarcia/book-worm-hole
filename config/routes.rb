@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :genres, only: [:index, :create]
   resources :user_books
 
-  resources :books, only: [:index, :show, :create]
+  resources :books, only: [:index, :show, :create, :update]
  
 
   post "/login", to: "sessions#create"

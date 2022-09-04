@@ -26,6 +26,7 @@ function NavBar({ user, setUser }) {
 
       <>
       <Button color="inherit" component={ Link } to="/">Home</Button>
+      <Button color="inherit" component={ Link } to="/publicbooks">Public Library</Button>
       <Button color="inherit" onClick={ handleLogoutClick }>Logout</Button>
     </>
     )

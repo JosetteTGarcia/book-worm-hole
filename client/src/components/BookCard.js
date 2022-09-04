@@ -18,15 +18,15 @@ function BookCard({book})
       <CardMedia
         component="img"
         height="300"
-        image="https://iceandfire.fandom.com/wiki/A_Game_of_Thrones"
+        image={book.img_url}
         alt="cover image"
       />
       <CardContent>
       <Typography gutterBottom variant="h5" component="div">
-      test title
+      {book.title}
     </Typography>
     <Typography variant="body1" color="text.secondary">
-      test author
+      {book.author}
     </Typography>
     {/* <Typography variant="body2" color={(book.completed) ? "green": "#ff4d4d"}>
       {(book.completed) ? <>Completed </>: <>Currently Reading </>}

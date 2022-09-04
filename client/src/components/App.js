@@ -29,6 +29,9 @@ return (
           <Route path="/" element={
             <Home user={user} />}
           />
+          <Route path="/publicbooks" element={
+            <AllBooks setUser={setUser} />}
+          />
         </Routes>
       ) : (
         <Routes>
@@ -40,9 +43,6 @@ return (
           />
           <Route path="/" element={
             <Home user={user}/>}
-          />
-          <Route path="/publicbooks" element={
-            <AllBooks setUser={setUser} />}
           />
         </Routes>
       )}
