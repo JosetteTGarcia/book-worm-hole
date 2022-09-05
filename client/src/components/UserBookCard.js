@@ -29,12 +29,27 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   
 
 
-function UserBookCard({userbook}){
+function UserBookCard({userbook, onRemove}){
   const [expanded, setExpanded] = useState(false);
 
  
   const handleExpandClick = () => {
     setExpanded(!expanded); }
+
+
+    const removeClick = (event) => {
+      const book = event.target.value
+      fetch(`http://localhost:3000/user_books/${book}`, {
+        method: "DELETE",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        }
+        })
+      .then((r) => r.json())
+      .then( data => {onRemove(data)
+      })
+    }
 
   return (
   
@@ -64,7 +79,10 @@ function UserBookCard({userbook}){
       </CardContent>
     <CardActions>
     
-    <Button size="small">
+    <Button 
+      size="small"
+      onClick = {(book) => console.log(book)}
+    >
       Add Notes
     </Button>
     <ExpandMore
@@ -76,7 +94,6 @@ function UserBookCard({userbook}){
           <ExpandMoreIcon/>
         </ExpandMore>
     </CardActions>
-
     <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -91,21 +108,19 @@ function UserBookCard({userbook}){
           Notes: <br/>
           {userbook.user_notes}
         </Typography>
-        <div>
-          <div>
-        <Button size="small">
-          Mark Completed
-        </Button>
-        </div>
-        <div>
-        <Button size="small">
-          Remove from Shelf
-        </Button>
-        </div>
-        </div>
+        <CardActions>
+            <Button size="small">
+              Mark Completed
+            </Button>
+            <Button size="small"
+            value={userbook.id}
+            onClick={removeClick}
+            >
+              Remove from Shelf
+            </Button>
+        </CardActions>
         </CardContent>
       </Collapse>
-    
   </Card> 
 
 )

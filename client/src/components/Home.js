@@ -12,6 +12,7 @@ function Home({ user }) {
   const [userBookData, setUserBookData] = useState([])
   const [search, setSearch] = useState("")
   const [sortBy, setSortBy] = useState("")
+  const [selectedBook, setSelectedBook] = useState("")
   
   
   
@@ -25,14 +26,23 @@ function Home({ user }) {
     }
   }, [user])
 
+
+  const removeBookEvent = removedBook => {
+    console.log(removedBook)
+    setUserBookData(userBookData.filter(book => book.id !== removedBook))
+  }
+
   const userBooksList = userBookData.map((book) => (
   <Grid item xs={12} sm={6} md= {4} key={book.id}>
     <UserBookCard 
     key={book.id}
     userbook={book} 
+    selectecBook={selectedBook}
+    onRemove={removeBookEvent}
     /> 
   </Grid>
 ))
+
   
   
   if (!user) {
