@@ -1,7 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import BookCard from './BookCard';
-
+import UserBookCard from './UserBookCard';
 //MainGrid/Container
 import CssBaseline from '@mui/material/CssBaseline';
 import {Box, TextField} from '@mui/material';
@@ -24,14 +23,14 @@ function Home({ user }) {
     }
   }, [user])
 
-//   const userBooksList = userBookData.map((book) => (
-//   <Grid item xs={12} sm={6} md= {4} key={user.book_id}>
-//     <BookCard 
-//     key={user.book_id}
-//     book={book} 
-//     /> 
-//   </Grid>
-// ))
+  const userBooksList = userBookData.map((book) => (
+  <Grid item xs={12} sm={6} md= {4} key={book.id}>
+    <UserBookCard 
+    key={book.id}
+    userbook={book} 
+    /> 
+  </Grid>
+))
   
   
   if (!user) {
@@ -46,11 +45,11 @@ function Home({ user }) {
     return (
       <React.Fragment>
       <CssBaseline />
-        <h1>Welcome, {user.username}!</h1>)
+        <h1>Welcome, {user.username}!</h1>
       <Container fixed sx={{ bgcolor: '#eeeae7', flexGrow: 1}}>
         <Container fixed>
           <Grid container spacing={2}>
-            {/* {userBooksList} */}
+            {userBooksList}
           </Grid>
         </Container>
       </Container>
