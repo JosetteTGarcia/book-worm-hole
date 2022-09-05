@@ -31,15 +31,12 @@ function BookCard({book})
     {/* <Typography variant="body2" color={(book.completed) ? "green": "#ff4d4d"}>
       {(book.completed) ? <>Completed </>: <>Currently Reading </>}
     </Typography> */}
-    {/* {(book.completed) ? <>
-          <Rating
-              type="number"
-              name="rating"
-              value={book.rating}
-              id="rating"
-            /> </>
-            : null}
-    {showDetails ? <ExtraBookInfo book={book} /> : null} */}
+    <Rating
+        type="number"
+        name="rating"
+        value={book.average_rating}
+        id="rating"
+      /> 
       </CardContent>
     </CardActionArea>
     <CardActions>

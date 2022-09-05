@@ -3,14 +3,17 @@ import BookCard from './BookCard';
 
 //MainGrid/Container
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
+import {Box, TextField} from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Filters from './SearchAndFilterBar';
 
 
 function AllBooks() {
 
   const [bookData, setBookData] = useState([])
+  const [search, setSearch] = useState("")
+  const [sortBy, setSortBy] = useState("")
 
   useEffect(() => {
       fetch('http://localhost:3000/books')
@@ -32,6 +35,9 @@ function AllBooks() {
   return (
     <React.Fragment>
       <CssBaseline />
+      <Container sx={{ bgcolor: '#eeeae7', flexGrow: 1}}>
+        <Filters setSortBy={setSortBy} sortBy={sortBy}/>
+      </Container> <br/>
       <Container fixed sx={{ bgcolor: '#eeeae7', flexGrow: 1}}>
         <Container fixed>
       <Grid container spacing={2}>
