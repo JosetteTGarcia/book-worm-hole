@@ -30,13 +30,13 @@ function Filters({setSortBy, sortBy, setSearch, search}){
       <div>
       <TextField 
         id="standard-basic" 
-        label="Search By Title" 
+        label="Search By Title or Author" 
         variant="standard"
         size="small"
         onChange={handleSearchChange}
 
       />
-    <InputLabel id="demo-select-small">Sory By</InputLabel>
+    {/* <InputLabel id="demo-select-small">Sory By</InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
@@ -51,7 +51,7 @@ function Filters({setSortBy, sortBy, setSearch, search}){
         <MenuItem value="rating" >Rating: Highest - Lowest</MenuItem>
         <MenuItem value="newest" >Newest - Oldest</MenuItem>
         <MenuItem value="oldest">Oldest - Newest</MenuItem>
-      </Select>
+      </Select> */}
       </div>
     </AppBar>
     </Box>

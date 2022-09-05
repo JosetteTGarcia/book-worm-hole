@@ -48,7 +48,9 @@ function AllBooks() {
 
     const publicBooksList = bookData.filter((book) => 
     {
-      return book.title.toLowerCase().includes(search.toLowerCase())
+      if (book.title.toLowerCase().includes(search.toLowerCase()) || book.author.toLowerCase().includes(search.toLowerCase())){
+        return book.title
+      }
     })
     .map((book) => (
     <Grid item xs={12} sm={6} md= {4} key={book.id}>
