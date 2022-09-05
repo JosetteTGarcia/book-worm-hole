@@ -10,17 +10,19 @@ import AppBar from '@mui/material/AppBar';
 
 
 
-function Filters({setSortBy, sortBy}){
+function Filters({setSortBy, sortBy, setSearch, search}){
 
-  // const handleFilterChange = (event) => {
-  //   event.preventDefault()
-  //   onChangeSortBy(event.target.value);
-  // };
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+    console.log(search)
+  };
 
-  // function handleSwitchClick(event){
-  //   onChange(event.target.checked)
-  //   console.log(event.target.checked, typeof event.target.checked)
-  // }
+  const handleFilterChange = (event) => {
+    event.preventDefault()
+    setSortBy(event.target.value);
+  };
+
+
   
   return (
     <Box sx={{ bgcolor: '#eeeae7', flexGrow: 1 }}>
@@ -28,9 +30,10 @@ function Filters({setSortBy, sortBy}){
       <div>
       <TextField 
         id="standard-basic" 
-        label="Search" 
+        label="Search By Title" 
         variant="standard"
         size="small"
+        onChange={handleSearchChange}
 
       />
     <InputLabel id="demo-select-small">Sory By</InputLabel>

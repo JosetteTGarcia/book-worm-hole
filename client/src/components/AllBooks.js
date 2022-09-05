@@ -15,6 +15,7 @@ function AllBooks() {
   const [search, setSearch] = useState("")
   const [sortBy, setSortBy] = useState("")
 
+//Main GET for initial component render
   useEffect(() => {
       fetch('http://localhost:3000/books')
       .then(resp => resp.json())
@@ -22,7 +23,34 @@ function AllBooks() {
       .then(console.log(bookData))
     }, [])
 
-    const publicBooksList = bookData.map((book) => (
+//     const displayedPlants = plants.filter((plant) => {
+//       return plant.name.toLowerCase().includes(searchTerm.toLowerCase());
+//     });
+
+// //Update BookData for search or Filter
+// useEffect(() => {
+//   const sortedBooksList = [...bookData].sort((book1 , book2) => {
+//   console.log("I'm in")
+//   if (sortBy === "rating") {
+//     console.log("hello, i'm rating")
+//     return book2.rating - book1.rating;
+//   } else if (sortBy === "oldest"){
+//     console.log("hello, i'm oldest")
+//     return new Date(book1.dateStarted) - new Date(book2.dateStarted);
+//   } else {
+//     console.log("hello, i'm newest")
+//     return new Date(book2.dateStarted) - new Date(book1.dateStarted);
+//   }
+// })
+// setBookData(sortedBooksList)
+// },[sortBy, search])
+
+
+    const publicBooksList = bookData.filter((book) => 
+    {
+      return book.title.toLowerCase().includes(search.toLowerCase())
+    })
+    .map((book) => (
     <Grid item xs={12} sm={6} md= {4} key={book.id}>
       <BookCard 
       key={book.id} 
@@ -36,7 +64,13 @@ function AllBooks() {
     <React.Fragment>
       <CssBaseline />
       <Container sx={{ bgcolor: '#eeeae7', flexGrow: 1}}>
-        <Filters setSortBy={setSortBy} sortBy={sortBy}/>
+        <Filters 
+          setSortBy={setSortBy} 
+          sortBy={sortBy}
+          setSearch={setSearch}
+          search={search}
+        
+        />
       </Container> <br/>
       <Container fixed sx={{ bgcolor: '#eeeae7', flexGrow: 1}}>
         <Container fixed>

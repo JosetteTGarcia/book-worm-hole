@@ -10,6 +10,8 @@ import Filters from './SearchAndFilterBar';
 
 function Home({ user }) {
   const [userBookData, setUserBookData] = useState([])
+  const [search, setSearch] = useState("")
+  const [sortBy, setSortBy] = useState("")
   
   
   

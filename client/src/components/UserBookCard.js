@@ -52,8 +52,8 @@ function UserBookCard({userbook}){
     <Typography variant="body1" color="text.secondary">
       {userbook.book.author}
     </Typography>
-    <Typography variant="body2" color={(userbook.completed) ? "green": "#ff4d4d"}>
-      {(userbook.completed) ? <>Completed </>: <>Currently Reading </>}
+    <Typography variant="body2" color={(userbook.is_completed) ? "green": "#ff4d4d"}>
+      {(userbook.is_completed) ? <>Completed </>: <>Currently Reading </>}
     </Typography>
     <Rating
         type="number"
@@ -64,7 +64,7 @@ function UserBookCard({userbook}){
       </CardContent>
     <CardActions>
     
-    <Button>
+    <Button size="small">
       Add Notes
     </Button>
     <ExpandMore
@@ -91,12 +91,18 @@ function UserBookCard({userbook}){
           Notes: <br/>
           {userbook.user_notes}
         </Typography>
-        <Button>
+        <div>
+          <div>
+        <Button size="small">
+          Mark Completed
+        </Button>
+        </div>
+        <div>
+        <Button size="small">
           Remove from Shelf
         </Button>
-        <Button>
-          Edit Details
-        </Button>
+        </div>
+        </div>
         </CardContent>
       </Collapse>
     
