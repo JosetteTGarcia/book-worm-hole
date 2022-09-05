@@ -30,7 +30,7 @@ return (
             <Home user={user} />}
           />
           <Route path="/publicbooks" element={
-            <AllBooks setUser={setUser} />}
+            <AllBooks user={user} setUser={setUser} />}
           />
         </Routes>
       ) : (

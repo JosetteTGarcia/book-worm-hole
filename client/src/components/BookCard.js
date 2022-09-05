@@ -8,9 +8,31 @@ import { Button, CardActionArea, CardActions} from '@mui/material';
 
 
 
-function BookCard({book})
+function BookCard({book, user})
 {
  
+
+  const handleAddClick = () => {
+   console.log(book)
+   console.log(user)
+    fetch('http://localhost:3000/user_books', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+        book_id: book.id,
+        date_started: new Date().toISOString().slice(0, 10)
+      })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+    })
+  
+  }
+
   return (
   
     <Card sx={{ maxWidth: 200}} variant="outlined">
@@ -40,7 +62,10 @@ function BookCard({book})
       </CardContent>
     </CardActionArea>
     <CardActions>
-      <Button>
+      <Button 
+        size="small"
+        onClick={handleAddClick}
+      >
         Add to booshelf
       </Button>
       

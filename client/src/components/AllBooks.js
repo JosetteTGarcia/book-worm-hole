@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Filters from './SearchAndFilterBar';
 
 
-function AllBooks() {
+function AllBooks({user}) {
 
   const [bookData, setBookData] = useState([])
   const [search, setSearch] = useState("")
@@ -57,6 +57,7 @@ function AllBooks() {
       <BookCard 
       key={book.id} 
       book={book} 
+      user={user}
       /> 
     </Grid>
   ))
