@@ -6,11 +6,14 @@ import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
-import { Button, CardActionArea, CardActions, Collapse} from '@mui/material';
+import { Button, CardActionArea, CardActions, Collapse, TextField} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+
+
 
 
 
@@ -34,10 +37,50 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 function UserBookCard({userbook, onRemoveBookEvent}){
   const [expanded, setExpanded] = useState(false);
+  const [editBook, setEditBook] = useState(false)
+  const [bookEdits, setBookEdits] = useState({
+    rating: 0,
+    user_notes: "",
+    is_completed: null
+  })
 
  
   const handleExpandClick = () => {
     setExpanded(!expanded); }
+
+  const handlEditClick = () => {
+    setEditBook(!editBook)
+
+  }
+
+  const handleChange = (event) => {
+    if (event.target.name === "is_completed"){
+      setBookEdits({
+        ...bookEdits,
+        is_completed: true
+       })
+    }
+     setBookEdits({
+      ...bookEdits,
+      [event.target.name]: event.target.value
+     })
+  }
+
+  const saveChanges = (event) => {
+    event.preventDefault();
+    fetch(`http://localhost:3000/user_books/${userbook.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookEdits),
+    })
+      .then((r) => r.json())
+      .then((data) => console.log(data))
+      .then(() => {
+        console.log("success!")
+        setEditBook(false)})
+  }
 
 
     const removeClick = (event) => {
@@ -53,8 +96,11 @@ function UserBookCard({userbook, onRemoveBookEvent}){
       .then(onRemoveBookEvent(book))
     }
 
+
+    
   return (
-  
+  <>
+    {!editBook ? 
     <Card sx={{ maxWidth: 400}} variant="outlined">
       <CardMedia
         component="img"
@@ -83,19 +129,30 @@ function UserBookCard({userbook, onRemoveBookEvent}){
     
     <Button 
       size="small"
-      onClick = {(book) => console.log(book)}
+      value={userbook}
+      onClick = {handlEditClick}
     >
       <EditIcon/>
-    </Button>
-    <Button size="small">
-            <CheckCircleOutlineOutlinedIcon/>
-    </Button>
-    <Button size="small"
+    </Button> <br/>
+
+    {(userbook.is_completed) ? 
+           null
+            : <> 
+              <IconButton 
+              name="is_completed"
+              size="small" 
+              value={userbook.is_completed}
+              onClick = {handleChange}
+              >
+              <CheckCircleOutlineOutlinedIcon/>
+            </IconButton>
+     </> }
+    <IconButton size="small"
             value={userbook.id}
             onClick={removeClick}
             >
               <DeleteIcon/>
-            </Button>
+            </IconButton>
     <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -122,6 +179,56 @@ function UserBookCard({userbook, onRemoveBookEvent}){
         </CardContent>
       </Collapse>
   </Card> 
+  
+  ///EDIT BOOK CONTENT VVVV
+  :
+
+  <Card sx={{ maxWidth: 400}}>
+  <CardMedia
+        component="img"
+        height="300"
+        image={userbook.book.img_url}
+        alt="cover image"
+      />
+      <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+      {userbook.book.title}
+    </Typography>
+    <Typography variant="body1" color="text.secondary">
+      {userbook.book.author}
+    </Typography> <br/>
+    <Rating
+          type="number"
+          name="rating"
+          onChange={handleChange}
+          defaultValue={userbook.rating}
+          id="rating"
+        /> <br/>
+    <TextField
+          id="outlined-multiline-static"
+          name="user_notes"
+          label="Review"
+          multiline
+          rows={4}
+          onChange={handleChange}
+          defaultValue={userbook.user_notes}
+        />
+        <CardActions>
+        <Button 
+          size="small"
+          variant="contained"
+          value={userbook.id}
+           onClick = {saveChanges}
+          >
+          Save Changes
+        </Button>
+        </CardActions>
+    </CardContent>
+  </Card>
+    }
+
+
+  </>
 
 )
 
