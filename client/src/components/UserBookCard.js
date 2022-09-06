@@ -29,7 +29,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   
 
 
-function UserBookCard({userbook, onRemove}){
+function UserBookCard({userbook, onRemoveBookEvent}){
   const [expanded, setExpanded] = useState(false);
 
  
@@ -47,8 +47,7 @@ function UserBookCard({userbook, onRemove}){
         }
         })
       .then((r) => r.json())
-      .then( data => {onRemove(data)
-      })
+      .then(onRemoveBookEvent(book))
     }
 
   return (

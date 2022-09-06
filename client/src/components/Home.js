@@ -18,19 +18,17 @@ function Home({ user }) {
   
   
   useEffect(() => {
-    if (user) {
     fetch('http://localhost:3000/user_books')
     .then(resp => resp.json())
     .then(data => setUserBookData(data))
-    .then(console.log(userBookData))
-    }
-  }, [user])
+  }, [])
 
 
-  const removeBookEvent = removedBook => {
-    console.log(removedBook)
-    setUserBookData(userBookData.filter(book => book.id !== removedBook))
-  }
+  const onRemoveBookEvent = id => {
+    setUserBookData(userBookData.filter(b => b.id != id));
+ };
+ 
+  
 
   const userBooksList = userBookData.map((book) => (
   <Grid item xs={12} sm={6} md= {4} key={book.id}>
@@ -38,7 +36,7 @@ function Home({ user }) {
     key={book.id}
     userbook={book} 
     selectecBook={selectedBook}
-    onRemove={removeBookEvent}
+    onRemoveBookEvent={onRemoveBookEvent}
     /> 
   </Grid>
 ))
