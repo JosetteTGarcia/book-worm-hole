@@ -8,6 +8,9 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import { Button, CardActionArea, CardActions, Collapse} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
 
 
@@ -52,7 +55,7 @@ function UserBookCard({userbook, onRemoveBookEvent}){
 
   return (
   
-    <Card sx={{ maxWidth: 200}} variant="outlined">
+    <Card sx={{ maxWidth: 400}} variant="outlined">
       <CardMedia
         component="img"
         height="300"
@@ -82,8 +85,17 @@ function UserBookCard({userbook, onRemoveBookEvent}){
       size="small"
       onClick = {(book) => console.log(book)}
     >
-      Add Notes
+      <EditIcon/>
     </Button>
+    <Button size="small">
+            <CheckCircleOutlineOutlinedIcon/>
+    </Button>
+    <Button size="small"
+            value={userbook.id}
+            onClick={removeClick}
+            >
+              <DeleteIcon/>
+            </Button>
     <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -107,17 +119,6 @@ function UserBookCard({userbook, onRemoveBookEvent}){
           Notes: <br/>
           {userbook.user_notes}
         </Typography>
-        <CardActions>
-            <Button size="small">
-              Mark Completed
-            </Button>
-            <Button size="small"
-            value={userbook.id}
-            onClick={removeClick}
-            >
-              Remove from Shelf
-            </Button>
-        </CardActions>
         </CardContent>
       </Collapse>
   </Card> 
