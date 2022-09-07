@@ -58,6 +58,7 @@ function BookCard({book, user})
         name="rating"
         value={book.average_rating}
         id="rating"
+        readOnly
       /> 
       </CardContent>
     </CardActionArea>

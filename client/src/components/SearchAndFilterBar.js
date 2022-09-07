@@ -14,7 +14,6 @@ function Filters({setSortBy, sortBy, setSearch, search}){
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
-    console.log(search)
   };
 
   const handleFilterChange = (event) => {

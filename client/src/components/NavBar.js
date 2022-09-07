@@ -13,7 +13,6 @@ console.log(window.React1 === window.React2);
 
 function NavBar({ user, setUser }) {
   function handleLogoutClick() {
-    console.log("clicked!")
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);

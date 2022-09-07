@@ -20,7 +20,7 @@ function Home({ user }) {
   useEffect(() => {
     fetch('http://localhost:3000/user_books')
     .then(resp => resp.json())
-    .then(data => setUserBookData(data))
+    .then((data) => console.log(data))
   }, [])
 
 
@@ -53,11 +53,7 @@ function Home({ user }) {
   if (!user) {
     return <h1>Please Login or Sign Up</h1>;
     
-  } else {
-
-
-
-
+  } else if (user && userBookData.length > 0) {
 
     return (
       <React.Fragment>
@@ -74,9 +70,9 @@ function Home({ user }) {
     
     )
     
-    
-    
-    
+  } else {
+    <h1>Welcome, {user.username}!</h1>
+    return  <h1>No books added yet! Visit the Public Library to add to your shelf.</h1>;
   }
 }
 
