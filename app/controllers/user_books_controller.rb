@@ -1,12 +1,12 @@
 class UserBooksController < ApplicationController
 
   def index
-    userbooks = @currentuser.user_books.all
+    userbooks = UserBook.all
     render json: userbooks
-  end
+end
 
   def show
-    book = @currentuser.user_books.find_by(id: params[:id])
+    book = UserBook.find_by(id: params[:id])
       if book
         render json: book
       else 
