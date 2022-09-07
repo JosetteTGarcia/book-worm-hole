@@ -27,6 +27,12 @@ function Home({ user }) {
   const onRemoveBookEvent = id => {
     setUserBookData(userBookData.filter(b => b.id != id));
  };
+
+ const handleEditBook = updatedBook => {
+  setUserBookData(userBookData.map((book) =>
+  book.id === updatedBook.id ? updatedBook : book
+));
+}
  
   
 
@@ -36,6 +42,7 @@ function Home({ user }) {
     key={book.id}
     userbook={book} 
     selectecBook={selectedBook}
+    handleEditBook={handleEditBook}
     onRemoveBookEvent={onRemoveBookEvent}
     /> 
   </Grid>

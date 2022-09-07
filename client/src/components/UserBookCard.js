@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -35,13 +35,14 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   
 
 
-function UserBookCard({userbook, onRemoveBookEvent}){
+function UserBookCard({userbook, onRemoveBookEvent, handleEditBook}){
+  const didMount = useRef(false);
+
   const [expanded, setExpanded] = useState(false);
   const [editBook, setEditBook] = useState(false)
   const [bookEdits, setBookEdits] = useState({
     rating: 0,
-    user_notes: "",
-    is_completed: null
+    user_notes: ""
   })
 
  
@@ -54,20 +55,28 @@ function UserBookCard({userbook, onRemoveBookEvent}){
   }
 
   const handleChange = (event) => {
-    if (event.target.name === "is_completed"){
-      setBookEdits({
-        ...bookEdits,
-        is_completed: true
-       })
-    }
      setBookEdits({
       ...bookEdits,
       [event.target.name]: event.target.value
      })
   }
 
-  const saveChanges = (event) => {
-    event.preventDefault();
+  const handleCompleted = () => {
+    fetch(`http://localhost:3000/user_books/${userbook.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({...userbook,
+        is_completed: true,
+        date_completed: new Date().toISOString().slice(0, 10)}),
+    })
+      .then((r) => r.json())
+      .then((data) => handleEditBook(data))
+  }
+
+
+  const saveChanges = () => {
     fetch(`http://localhost:3000/user_books/${userbook.id}`, {
       method: "PATCH",
       headers: {
@@ -76,15 +85,13 @@ function UserBookCard({userbook, onRemoveBookEvent}){
       body: JSON.stringify(bookEdits),
     })
       .then((r) => r.json())
-      .then((data) => console.log(data))
-      .then(() => {
-        console.log("success!")
-        setEditBook(false)})
+      .then((data) => handleEditBook(data))
+      .then(setEditBook(false))
   }
 
 
     const removeClick = (event) => {
-      const book = event.target.value
+      const book = event.currentTarget.value
       fetch(`http://localhost:3000/user_books/${book}`, {
         method: "DELETE",
         headers: {
@@ -123,6 +130,7 @@ function UserBookCard({userbook, onRemoveBookEvent}){
         name="rating"
         value={userbook.rating}
         id="rating"
+        readOnly
       /> 
       </CardContent>
     <CardActions>
@@ -138,21 +146,21 @@ function UserBookCard({userbook, onRemoveBookEvent}){
     {(userbook.is_completed) ? 
            null
             : <> 
-              <IconButton 
+              <Button
               name="is_completed"
               size="small" 
               value={userbook.is_completed}
-              onClick = {handleChange}
+              onClick={(e) => handleCompleted(e)}
               >
               <CheckCircleOutlineOutlinedIcon/>
-            </IconButton>
+            </Button>
      </> }
-    <IconButton size="small"
+    <Button size="small"
             value={userbook.id}
-            onClick={removeClick}
+            onClick={(e) => removeClick(e)}
             >
               <DeleteIcon/>
-            </IconButton>
+            </Button>
     <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
