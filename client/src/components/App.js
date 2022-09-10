@@ -10,21 +10,31 @@ import AllBooks from "./AllBooks";
 function App() {
 
   const [user, setUser] = useState(null);
+  const [authChecked, setAuthChecked] = useState(false)
+
 
   useEffect(() => {
     // auto-login
-    fetch("/me").then((r) => {
+    fetch("/me", {
+      // credentials: 'include'
+    }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) =>
+        { setUser(user)
+          setAuthChecked(true)
+        });
+      } else{
+        setAuthChecked(true)
       }
     });
   }, []);
 
+
+if(!authChecked) { return <div></div>}
 return (
-  <>
+  <main>
     <NavBar user={user} setUser={setUser} />
-    <main>
-      {user ? (
+  {user ? (
         <Routes>
           <Route path="/" element={
             <Home user={user} />}
@@ -34,20 +44,19 @@ return (
           />
         </Routes>
       ) : (
-        <Routes>
-           <Route path="/signup" element={
-            <SignUp setUser={setUser} />}
-          />
-         <Route path="/login" element={
-            <Login setUser={setUser}/>}
-          />
-          <Route path="/" element={
-            <Home user={user}/>}
-          />
-        </Routes>
+          <Routes>
+            <Route path="/signup" element={
+              <SignUp setUser={setUser} />}
+            />
+          <Route path="/login" element={
+              <Login onLogin={setUser}/>}
+            />
+            <Route path="/" element={
+              <Home user={user}/>}
+            />
+          </Routes>
       )}
-    </main>
-   </>
+      </main>
 )
 }
 export default App;

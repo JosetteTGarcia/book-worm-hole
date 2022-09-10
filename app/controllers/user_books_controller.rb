@@ -1,9 +1,12 @@
 class UserBooksController < ApplicationController
+  skip_before_action :authenticate_user
+
 
   def index
     userbooks = UserBook.all
     render json: userbooks
-end
+  end
+
 
   def show
     book = UserBook.find_by(id: params[:id])
@@ -15,12 +18,12 @@ end
   end
 
   def create
-    book = @current_user.user_books.create!(user_books_params)
+    book = UserBook.create!(user_books_params)
     render json: book, status: :created
   end
 
   def update
-    book = @current_user.user_books.find_by(id: params[:id])
+    book = UserBook.find_by(id: params[:id])
     if book
       book.update(user_books_params)
       render json: book
@@ -30,7 +33,7 @@ end
   end
 
 def destroy
-  book = @current_user.user_books.find_by(id: params[:id])
+  book = UserBook.find_by(id: params[:id])
   if book 
     book.destroy
     render json: {}
@@ -44,4 +47,6 @@ end
   def user_books_params
     params.permit(:book_id, :user_id, :user_notes, :date_started, :date_completed, :is_completed, :rating)
   end
+
+ 
 end

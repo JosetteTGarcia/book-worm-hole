@@ -14,14 +14,13 @@ function Home({ user }) {
   const [sortBy, setSortBy] = useState("")
   const [selectedBook, setSelectedBook] = useState("")
   
-  
-  
-  
+    
   useEffect(() => {
     fetch('http://localhost:3000/user_books')
     .then(resp => resp.json())
     .then((data) => {
       console.log(data)
+      setUserBookData(data)
     })
  
   }, [])
@@ -39,7 +38,7 @@ function Home({ user }) {
  
   
 
-  const userBooksList = userBookData.map((book) => (
+  const userBooksList = userBookData.length > 0 ? userBookData.map((book) => (
   <Grid item xs={12} sm={6} md= {4} key={book.id}>
     <UserBookCard 
     key={book.id}
@@ -49,7 +48,11 @@ function Home({ user }) {
     onRemoveBookEvent={onRemoveBookEvent}
     /> 
   </Grid>
-))
+
+)) : <p>nothing found</p>
+
+
+console.log(userBookData)
 
   
   
