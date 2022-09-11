@@ -36,7 +36,7 @@ return (
     <NavBar user={user} setUser={setUser} />
   {user ? (
         <Routes>
-          <Route path="/" element={
+          <Route path="/home" element={
             <Home user={user} />}
           />
           <Route path="/publicbooks" element={
@@ -51,7 +51,7 @@ return (
           <Route path="/login" element={
               <Login onLogin={setUser}/>}
             />
-            <Route path="/" element={
+            <Route path="/home" element={
               <Home user={user}/>}
             />
           </Routes>
