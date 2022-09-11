@@ -62,7 +62,7 @@ function UserBookCard({userbook, onRemoveBookEvent, handleEditBook}){
   }
 
   const handleCompleted = () => {
-    fetch(`http://localhost:3000/user_books/${userbook.id}`, {
+    fetch(`/api/user_books/${userbook.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function UserBookCard({userbook, onRemoveBookEvent, handleEditBook}){
 
 
   const saveChanges = () => {
-    fetch(`http://localhost:3000/user_books/${userbook.id}`, {
+    fetch(`/api/user_books/${userbook.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
