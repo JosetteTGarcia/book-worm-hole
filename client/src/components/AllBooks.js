@@ -17,7 +17,7 @@ function AllBooks({user}) {
 
 //Main GET for initial component render
   useEffect(() => {
-      fetch('http://localhost:3000/books')
+      fetch('http://localhost:3000/api/books')
       .then(resp => resp.json())
       .then(data => setBookData(data))
       .then(console.log(bookData))

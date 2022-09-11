@@ -1,4 +1,4 @@
-class BooksController < ApplicationController
+class Api::BooksController < ApplicationController
   skip_before_action :authenticate_user
 
   def index

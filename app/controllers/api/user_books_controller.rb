@@ -1,4 +1,4 @@
-class UserBooksController < ApplicationController
+class Api::UserBooksController < ApplicationController
   skip_before_action :authenticate_user
 
 

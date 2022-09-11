@@ -92,7 +92,7 @@ function UserBookCard({userbook, onRemoveBookEvent, handleEditBook}){
 
     const removeClick = (event) => {
       const book = event.currentTarget.value
-      fetch(`http://localhost:3000/user_books/${book}`, {
+      fetch(`http://localhost:3000/api/user_books/${book}`, {
         method: "DELETE",
         headers: {
           "Accept": "application/json",
