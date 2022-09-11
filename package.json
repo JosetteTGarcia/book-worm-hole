@@ -2,7 +2,8 @@
   "name": "phase-4-deploying-app-demo",
   "description": "Build scripts for Heroku",
   "engines": {
-    "node": "16.13.1"
+    "node": "16.13.1",
+    "npm": "14.0.1"
   },
   "scripts": {
       "clean": "rm -rf public",
