@@ -15,7 +15,7 @@ function Login({ onLogin }) {
     e.preventDefault();
     setIsLoading(true);
 
-    fetch("api/login", {
+    fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

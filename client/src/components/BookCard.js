@@ -15,7 +15,7 @@ function BookCard({book, user})
   const handleAddClick = () => {
    console.log(book)
    console.log(user)
-    fetch('http://localhost:3000/api/user_books', {
+    fetch('/api/user_books', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

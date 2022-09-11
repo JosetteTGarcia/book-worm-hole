@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     // auto-login
-    fetch("api/me", {
+    fetch("/api/me", {
       // credentials: 'include'
     }).then((r) => {
       if (r.ok) {
