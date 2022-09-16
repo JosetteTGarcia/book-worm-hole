@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     // auto-login
-    fetch("/api/me", {
+    fetch("http://localhost:4000/api/me", {
       // credentials: 'include'
     }).then((r) => {
       if (r.ok) {
@@ -30,20 +30,20 @@ function App() {
   }, []);
 
 
-if(!authChecked) { return <div></div>}
-return (
-  <main>
-    <NavBar user={user} setUser={setUser} />
-  {user ? (
-        <Routes>
-          <Route path="/home" element={
+  return (
+    <>
+      <NavBar user={user} setUser={setUser} />
+      <main>
+        {user ? (
+          <Routes>
+          <Route path="/" element={
             <Home user={user} />}
           />
           <Route path="/publicbooks" element={
             <AllBooks user={user} setUser={setUser} />}
           />
         </Routes>
-      ) : (
+        ) : (
           <Routes>
             <Route path="/signup" element={
               <SignUp setUser={setUser} />}
@@ -51,13 +51,14 @@ return (
           <Route path="/login" element={
               <Login onLogin={setUser}/>}
             />
-            <Route path="/home" element={
+            <Route path="/" element={
               <Home user={user}/>}
             />
           </Routes>
-      )}
+        )}
       </main>
-)
+     </>
+  )
 }
 export default App;
 

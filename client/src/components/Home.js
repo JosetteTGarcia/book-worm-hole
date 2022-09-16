@@ -16,10 +16,11 @@ function Home({ user }) {
   
     
   useEffect(() => {
-    fetch('/api/user_books')
+    fetch('http://localhost:4000/api/user_books')
     .then(resp => resp.json())
     .then((data) => {
       console.log(data)
+      console.log("hello")
       setUserBookData(data)
     })
  

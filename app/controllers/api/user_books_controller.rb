@@ -3,7 +3,7 @@ class Api::UserBooksController < ApplicationController
 
 
   def index
-    userbooks = UserBook.all
+    userbooks = current_user.user_books
     render json: userbooks
   end
 
