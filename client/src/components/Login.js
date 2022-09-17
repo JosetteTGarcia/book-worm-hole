@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState('')
   const [isLoading, setIsLoading] = useState(false);
 
 
@@ -25,22 +25,24 @@ function Login({ onLogin }) {
       setIsLoading(false)
       if (r.ok) {
         r.json().then((user) => {
-          console.log(user)
           onLogin(user);
         })
         navigate("/")
        } else {
           r.json().then(({ error }) => {
-            setErrors(error.errors)
+            setErrors(error)
         })
       }
     });
   }
+  console.log(errors)
 
   return (
     <div>
+      
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
+        <p className="text-red-400 h-8">{errors}</p>
         <label htmlFor="username">Username</label>
         <input
           type="text"
@@ -60,12 +62,6 @@ function Login({ onLogin }) {
         <button type="submit">
         {isLoading ? "Loading..." : "Login"}
         </button>
-        <p>
-        {errors ?  
-        errors.map((err) => (
-          <p key={err}>{err}</p>
-        )) : null}
-        </p>
       </form>
     </div>
   );

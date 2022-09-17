@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -6,12 +6,11 @@ import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
-import { Button, CardActionArea, CardActions, Collapse, TextField} from '@mui/material';
+import { Button, CardActions, Collapse, TextField} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
 
 
@@ -36,7 +35,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 
 function UserBookCard({userbook, onRemoveBookEvent, handleEditBook}){
-  const didMount = useRef(false);
 
   const [expanded, setExpanded] = useState(false);
   const [editBook, setEditBook] = useState(false)

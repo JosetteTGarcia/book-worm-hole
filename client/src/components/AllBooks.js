@@ -3,7 +3,6 @@ import BookCard from './BookCard';
 
 //MainGrid/Container
 import CssBaseline from '@mui/material/CssBaseline';
-import {Box, TextField} from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Filters from './SearchAndFilterBar';

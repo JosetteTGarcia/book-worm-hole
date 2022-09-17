@@ -3,24 +3,17 @@ import React, {useState, useEffect} from 'react';
 import UserBookCard from './UserBookCard';
 //MainGrid/Container
 import CssBaseline from '@mui/material/CssBaseline';
-import {Box, TextField} from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Filters from './SearchAndFilterBar';
 
 function Home({ user }) {
   const [userBookData, setUserBookData] = useState([])
-  const [search, setSearch] = useState("")
-  const [sortBy, setSortBy] = useState("")
-  const [selectedBook, setSelectedBook] = useState("")
   
     
   useEffect(() => {
     fetch('http://localhost:4000/api/user_books')
     .then(resp => resp.json())
     .then((data) => {
-      console.log(data)
-      console.log("hello")
       setUserBookData(data)
     })
  
@@ -44,16 +37,14 @@ function Home({ user }) {
     <UserBookCard 
     key={book.id}
     userbook={book} 
-    selectecBook={selectedBook}
     handleEditBook={handleEditBook}
     onRemoveBookEvent={onRemoveBookEvent}
     /> 
   </Grid>
 
-)) : <p>nothing found</p>
+)) : <p>You do not currently have any books on your shelf! Visit the Public Library to check some out.</p>
 
 
-console.log(userBookData)
 
   
   

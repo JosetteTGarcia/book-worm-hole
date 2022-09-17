@@ -1,8 +1,4 @@
 import React from 'react'
-//Filter Drop Down menu
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import {Box, TextField} from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 
@@ -10,17 +6,13 @@ import AppBar from '@mui/material/AppBar';
 
 
 
-function Filters({setSortBy, sortBy, setSearch, search}){
+function Filters({setSearch}){
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
   };
 
-  const handleFilterChange = (event) => {
-    event.preventDefault()
-    setSortBy(event.target.value);
-  };
-
+ 
 
   
   return (
