@@ -35,7 +35,7 @@ function Login({ onLogin }) {
       }
     });
   }
-  console.log(errors)
+
 
   return (
     <div>
